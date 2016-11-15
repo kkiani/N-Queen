@@ -116,11 +116,8 @@ def main():
 
 		generation_counter = generation_counter + 1
 
-	# for i in range(0, generation):	#generations
-
 
 	# for item in bests:
-	# 	print(str(item) + " : " + str(item.fitness()))
 	answer = bests.bestChromosome()
 	print("-----------------------------------------------------")
 	print("|  Best answer: " + str(answer) + " fitness:" + str(answer.fitness()) + "  |")
@@ -130,11 +127,3 @@ def main():
 
 init()
 main()
-# print(population.bestChromosome())
-# print(mutation_pool())
-# print(fitness([0, 1, 2, 3, 4, 5, 6, 7]))
-# print(population[0].fitness())
-# print(population[4])
-# print(crossover(population[0], population[4]))
-
-
