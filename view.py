@@ -2,7 +2,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 class GameBoard(tk.Frame):
-	def __init__(self, parent, rows=8, columns=8, size=84, color1="white", color2="black"):
+	def __init__(self, parent, rows=8, columns=8, size=84, color1="white", color2="white"):
 		'''size is the size of a square, in pixels'''
 
 		self.rows = rows
@@ -83,10 +83,10 @@ class GameBoard(tk.Frame):
 # '''
 
 
-def showChromosome(chromosome = []):
+def showChromosome(chromosome = [], size = 8):
 	root = tk.Tk()
 	root.wm_title("Genetic 8 Queen")
-	board = GameBoard(root)
+	board = GameBoard(root, rows=size, columns=size)
 	board.pack(side="top", fill="both", expand="true", padx=4, pady=4)
 	im = Image.open("/Users/kiarash/PycharmProjects/8Queen/queenW.png")
 	player1 = ImageTk.PhotoImage(im)

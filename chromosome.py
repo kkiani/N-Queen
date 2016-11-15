@@ -11,6 +11,14 @@ class Chromosome(list):
 	def __init__(self, *args):
 		super(Chromosome, self).__init__(*args)
 
+	def fullScore(self):
+
+		fullScore = 0
+		for i in range(0, self.__len__()):
+			fullScore = fullScore + i
+
+		return fullScore
+
 	def fitness(self):
 
 		error = 0
@@ -20,7 +28,9 @@ class Chromosome(list):
 				if abs(self[i] - self[j]) == abs(i - j):
 					error += 1
 
-		return 28 - error
+
+
+		return self.fullScore() - error
 
 
 class Population(list):
