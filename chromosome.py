@@ -1,4 +1,5 @@
 import random
+import copy
 
 
 class Chromosome(list):
@@ -57,3 +58,29 @@ class Population(list):
 		selected_mutens_index = random.sample(range(0, self.__len__()), numberOfMutans)
 		for index in selected_mutens_index:
 			self.__mutan_chromosome(self[index])
+
+	def __sortByFitness(self):
+		for i in range(0, self.__len__()):
+			for j in range(i, self.__len__()):
+				if self[i].fitness() < self[j].fitness():
+					self[i], self[j] = self[j], self[i]
+
+
+	def NextGeneration(self, SelectionRatio, childs):
+
+		mergedGeneration = copy.deepcopy(self)
+		mergedGeneration.extend(childs)
+		nextGeneration = Population()
+
+		mergedGeneration.__sortByFitness()
+		selectingSize = int(mergedGeneration.__len__() * SelectionRatio)
+
+		for i in range(0, selectingSize):
+			nextGeneration.append(mergedGeneration.pop(i))
+
+		for i in range(0, self.__len__() - nextGeneration.__len__()):
+			index = random.randint(0, mergedGeneration.__len__() - 1)
+			nextGeneration.append(mergedGeneration.pop(index))
+
+		return nextGeneration
+

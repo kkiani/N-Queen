@@ -8,8 +8,9 @@ import view
 
 initPopulationSize = 20
 breakPoint = 4
-mutationRatio = 0.01
+mutationRatio = 0.25
 generation = 100
+selectionRatioOnGeneration = 0.15
 
 population = Population() #Test.makePopulation()
 
@@ -89,22 +90,22 @@ def main():
 	fitAnswer = 0
 	generation_counter = 0
 	while fitAnswer != 28 and generation_counter < generation:
-		new_generation = Population()
+		population_childs = Population()
 		for j in range(0, initPopulationSize):
 			parent1, parent2 = selection(mutation_pool())
 			child = crossover(parent1, parent2)
-			new_generation.append(child)
+			population_childs.append(child)
 
 		population.mutating(mutationRatio)
 
-		new_generation.append(population.bestChromosome())
-		population = new_generation
-		new_generation_best_answer = population.bestChromosome()
-		bests.append(new_generation_best_answer)
+		population = population.NextGeneration(selectionRatioOnGeneration, population_childs)
+		
+		nextGenerationBestAnswer = population.bestChromosome()
+		bests.append(nextGenerationBestAnswer)
 
-		fitAnswer = new_generation_best_answer.fitness()
-		print("Generation " + str(generation_counter) + ": " + str(new_generation_best_answer) + " fitness: " + str(
-			new_generation_best_answer.fitness()))
+		fitAnswer = nextGenerationBestAnswer.fitness()
+		print("Generation " + str(generation_counter) + ": " + str(nextGenerationBestAnswer) + " fitness: " + str(
+			nextGenerationBestAnswer.fitness()))
 
 		generation_counter = generation_counter + 1
 
